@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item 
+        android:id="@+id/pedido_menu_clientesvisitados_opcion" 
+        android:title="CLIENTES VISITADOS"
+        android:icon="@drawable/clientes_visitados"></item>
+    
+    <item 
+        android:id="@+id/pedido_menu_listapedidos_opcion" 
+        android:title="VER PEDIDOS"
+        android:icon="@drawable/pedidos"></item>
+    
+    <item 
+        android:id="@+id/pedido_menu_salir_opcion" 
+        android:title="SALIR"
+        android:icon="@drawable/salir"></item>
+    
+    <item 
+        android:id="@+id/pedido_menu_nuevo_opcion" 
+        android:title="NUEVO"
+        android:icon="@drawable/add_user"></item>
+    
+    <item 
+        android:id="@+id/pedido_menu_actualizar_opcion" 
+        android:title="ACTUALIZAR"
+        android:icon="@drawable/sincronizar"></item>
+</menu>

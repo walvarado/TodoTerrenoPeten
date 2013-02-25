@@ -1,0 +1,28 @@
+<resources>
+    <!-- TextColor -->
+	<color name="color_textbutton_001_normal">#333333</color>
+	<color name="color_textbutton_001_press">#F4F4F4</color>
+	
+	<!-- StrokeColor -->
+	<color name="color_stroke_button_001_normal">#333333</color>
+	<color name="color_stroke_button_001_press">#F4F4F4</color>
+	
+	<color name="color_stroke_spinner_001_normal">#336633</color>
+	<color name="color_stroke_spinner_001_press">#66FF66</color>
+	
+	<color name="color_stroke_001_normal">#333333</color>
+	<color name="color_stroke_001_press">#F4F4F4</color>
+	
+	
+	<!-- SpinnerColor -->
+	<color name="color_spinner_start_001_normal">#CCFFCC</color>
+	<color name="color_spinner_end_001_normal">#99CC99</color>
+	<color name="color_spinner_start_001_press">#336633</color>
+	<color name="color_spinner_end_001_press">#99FF99</color>
+	
+	<!-- ButtonColor -->
+	<color name="color_button_start_001_normal">#E3E3E3</color>
+	<color name="color_button_end_001_normal">#BCBCBC</color>
+	<color name="color_button_start_001_press">#505050</color>
+	<color name="color_button_end_001_press">#ABABAB</color>
+</resources>

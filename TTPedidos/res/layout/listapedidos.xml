@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" android:background="@drawable/principal_background">
+
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rol_titulo_textview" style="@style/CodeFont_title"/>
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/background_listview" android:layout_marginBottom="5sp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/CodeFont_label_value"
+                    android:layout_width="160sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5sp"
+                    android:text="TOTAL VENDIDO" />
+
+                <TextView
+                    android:id="@+id/listapedidos_totalvendido_textview"
+                    style="@style/CodeFont_label_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                
+                <LinearLayout 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    
+                    <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/CodeFont_label_value"
+                    android:layout_width="160sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5sp"
+                    android:text="Pendidos Enviados" />
+
+                <TextView
+                    android:id="@+id/listapedidos_enviados_textview"
+                    style="@style/CodeFont_label_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/CodeFont_label_value"
+                    android:layout_width="160sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5sp"
+                    android:text="Pedidos Pendientes" />
+
+                <TextView
+                    android:id="@+id/listapedidos_pendientes_textview"
+                    style="@style/CodeFont_label_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+                    
+                    
+                </LinearLayout>
+
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right|center">
+            
+                <Button 
+                android:id="@+id/listapedidos_enviar_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sincronizar"/>
+            </LinearLayout>
+            
+            
+            
+            
+            
+            </LinearLayout>
+            
+        </LinearLayout>
+
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView1"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent" android:background="@drawable/background_listview">
+
+
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="90sp"
+                        android:layout_height="wrap_content"
+                        android:text="CLIENTE" style="@style/CodeFont_label"/>
+
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        style="@style/CodeFont_label"
+                        android:layout_width="90sp"
+                        android:layout_height="wrap_content"
+                        android:text="TOTAL" />
+
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        style="@style/CodeFont_label"
+                        android:layout_width="100sp"
+                        android:layout_height="wrap_content"
+                        android:text="FECHA" />
+                    
+                    <TextView
+                        android:id="@+id/textView"
+                        style="@style/CodeFont_label"
+                        android:layout_width="90sp"
+                        android:layout_height="wrap_content"
+                        android:text="HORA" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1sp"
+                    android:background="@drawable/horizontal_separator" >
+                </LinearLayout>
+
+                <ListView
+                    android:id="@+id/listapedidos_listView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" style="@style/ListView">
+                </ListView>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="40sp"
+    android:gravity="left|center"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/fila_lista_pedidos_codigo_textview"
+            style="@style/CodeFont_label_value"
+            android:layout_width="90dip"
+            android:layout_height="wrap_content"
+            android:gravity="left|center" />
+
+        <TextView
+            android:id="@+id/fila_lista_pedidos_total_textview"
+            style="@style/CodeFont_label_value"
+            android:layout_width="90sp"
+            android:layout_height="wrap_content"
+            android:gravity="left|center" />
+        
+        <TextView
+            android:id="@+id/fila_lista_pedidos_fecha_textview"
+            style="@style/CodeFont_label_value"
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:gravity="left|center" />
+
+        <TextView
+            android:id="@+id/fila_lista_pedidos_hora_textview"
+            style="@style/CodeFont_label_value"
+            android:layout_width="90sp"
+            android:layout_height="wrap_content"
+            android:gravity="left|center" />
+
+    </LinearLayout>
+
+</LinearLayout>

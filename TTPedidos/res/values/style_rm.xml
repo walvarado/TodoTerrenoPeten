@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Button -->
+
+    <style name="Button_001">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:textColor">@color/color_textbutton_001_normal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle"> bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/rm_selector_button_001</item>
+    </style>
+
+    <!-- Spinner -->
+    <style name="Spinner_001">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:textColor">@color/color_textbutton_001_normal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle"> bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/rm_selector_spinner_001</item>
+    </style>
+
+</resources>

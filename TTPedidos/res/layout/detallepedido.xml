@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" android:background="@drawable/principal_background">
+
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="tomar_detalle_pedido_titulo_textview" style="@style/CodeFont_title"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/background_listview" android:layout_marginBottom="5sp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detallepedido_total_textView2"
+                    style="@style/CodeFont_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tomar_detallepedido_total_textview" />
+
+                <TextView
+                    android:id="@+id/tomar_detallepedido_total_textview"
+                    style="@style/CodeFont_label_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="10sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center">
+
+                <EditText
+                    android:id="@+id/tomar_detallepedido_buscar_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="omar_detallepedido_buscar_articulo_edittext" />
+
+                <ImageButton
+                    android:id="@+id/tomar_detallepedido_borrar_imagebutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50sp"
+                    android:src="@drawable/clear" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" android:background="@drawable/background_listview">
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical" >
+
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:id="@+id/detallepedido_codigo_tabla"
+                            style="@style/CodeFont_label"
+                            android:layout_width="100sp"
+                            android:layout_height="wrap_content" android:text="tomar_detallepedido_codigo_tabla_textview"/>
+
+                        <TextView
+                            android:id="@+id/detallepedido_nombre_tabla"
+                            style="@style/CodeFont_label"
+                            android:layout_width="220sp"
+                            android:layout_height="wrap_content"
+                            android:text="tomar_detallepedido_nombre_tabla_textview" />
+
+                        <TextView
+                            android:id="@+id/detallepedido_cajas_tabla"
+                            style="@style/CodeFont_label"
+                            android:layout_width="40sp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="tomar_detallepedido_cajas_tabla_textview" />
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout01"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/vertical_separator"
+                            android:orientation="vertical" >
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/detallepedido_unidades_tabla"
+                            style="@style/CodeFont_label"
+                            android:layout_width="65sp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="tomar_detallepedido_unidades_tabla_textview" />
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout02"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/vertical_separator"
+                            android:orientation="vertical" >
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:id="@+id/detallepedido_valor_tabla"
+                            style="@style/CodeFont_label"
+                            android:layout_width="65sp"
+                            android:layout_height="wrap_content"
+                            android:text="tomar_detallepedido_valor_tabla_textview" />
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout03"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/vertical_separator"
+                            android:orientation="vertical" >
+                        </LinearLayout>
+                        
+                        <TextView
+                            android:id="@+id/detallepedido_presentacion_tabla"
+                            android:layout_width="65sp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tomar_pedido_presentacion_tabla_textview" 
+                            style="@style/CodeFont_label"/>
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout03"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/vertical_separator"
+                            android:orientation="vertical" >
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/detallepedido_existencia_tabla"
+                            android:layout_width="65sp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tomar_pedido_existencia_tabla_textview" style="@style/CodeFont_label"/>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout9"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical" android:background="@drawable/vertical_separator">
+                        </LinearLayout>
+                        
+                        <TextView
+                            android:id="@+id/detallepedido_bonificacion_tabla"
+                            android:layout_width="65sp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tomar_pedido_bonificacion_tabla_textview" style="@style/CodeFont_label"/>
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout04"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/vertical_separator"
+                            android:orientation="vertical" >
+                        </LinearLayout>
+                        
+
+                        <TextView
+                            android:id="@+id/detallepedido_total_tabla"
+                            style="@style/CodeFont_label"
+                            android:layout_width="65sp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tomar_pedido_total_tabla_textview" />
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout05"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/vertical_separator"
+                            android:orientation="vertical" >
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1sp"
+                    android:background="@drawable/horizontal_separator" >
+                </LinearLayout>
+
+
+                <ListView
+                    android:id="@+id/tomar_detallepedido_lista_productos_listview"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" style="@style/ListView">
+
+                </ListView>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>
