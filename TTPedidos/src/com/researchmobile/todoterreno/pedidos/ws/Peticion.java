@@ -537,10 +537,8 @@ public class Peticion {
 		try{
 			if (connectState.isConnectedToInternet(context)){
 				
-				System.out.println("enviarNuevoCliente.....");
-				Mail m = new Mail("walvarado@researchmobile.co", "JavaBuilder");
-				System.out.println("enviarNuevoCliente.....");
-			      String[] toArr = {"eclaudio@grupotodoterreno.com", "william.ale20@gmail.com", "wlevy@researchmobile.co", "walvarado@researchmobile.co"};
+				Mail m = new Mail("ttmp@researchmonile.co", "ttmp1234");
+				  String[] toArr = {"todoterrenoguate@hotmail.com", "sergiorene_5@yahoo.es", "memiliob@gmail.com", "wlevy@researchmobile.co", "walvarado@researchmobile.co"};
 //			      "eclaudio@grupotodoterreno.com", "william.ale20@gmail.com", "wlevy@researchmobile.co", 
 			      m.set_to(toArr); 
 			      m.set_from("todoterrenosc@gmail.com"); 
