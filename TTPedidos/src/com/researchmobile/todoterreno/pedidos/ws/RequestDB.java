@@ -200,7 +200,7 @@ public class RequestDB {
 			}
 		}
 		
-//guarda Promocion
+		//guarda Promocion
 		public void guardaPromocion(Context context,ListaPromocion listaPromocion) {
 			try{
 				int tamano = listaPromocion.getPromocion().length;
@@ -208,10 +208,18 @@ public class RequestDB {
 					DataFramework.getInstance().open(context, "com.researchmobile.todoterreno.pedidos.view");
 					Entity datoPromocion = new Entity("promocion");
 					Log.e("TT", "guardar promocion = " + listaPromocion.getPromocion()[i].getArtCodigo());
+					
+					int fardosc = listaPromocion.getPromocion()[i].getFardosCompra();
+					int artUnidadesFardo = listaPromocion.getPromocion()[i].getArtUnidadesFardo();
+					int unidadesc = listaPromocion.getPromocion()[i].getUnidadesCompra();
+					int totalUnidades = ((fardosc * artUnidadesFardo) + unidadesc);
+					Log.e("TT", "totalUnidades promocion = " + totalUnidades);
+					
 					datoPromocion.setValue("artcodigo", listaPromocion.getPromocion()[i].getArtCodigo());
-					datoPromocion.setValue("artunidadesfardo", listaPromocion.getPromocion()[i].getArtUnidadesFardo());
-					datoPromocion.setValue("fardosc", listaPromocion.getPromocion()[i].getFardosCompra());
-					datoPromocion.setValue("unidadesc", listaPromocion.getPromocion()[i].getUnidadesCompra());
+					datoPromocion.setValue("artunidadesfardo", artUnidadesFardo);
+					datoPromocion.setValue("fardosc", fardosc);
+					datoPromocion.setValue("unidadesc", unidadesc);
+					datoPromocion.setValue("totalunidades", totalUnidades);
 					datoPromocion.setValue("artcodigob", listaPromocion.getPromocion()[i].getArtCodigoBoni());
 					datoPromocion.setValue("artdescripcionb", listaPromocion.getPromocion()[i].getArtDescripcionBoni());
 					datoPromocion.setValue("fardosb", listaPromocion.getPromocion()[i].getFardosBoni());
@@ -219,6 +227,7 @@ public class RequestDB {
 					datoPromocion.setValue("precioventab", listaPromocion.getPromocion()[i].getPrecioVentaBoni());
 					datoPromocion.setValue("limiteofertascli", listaPromocion.getPromocion()[i].getLimiteOfertaCliente());
 					datoPromocion.setValue("limiteofertasven", listaPromocion.getPromocion()[i].getLimiteOfertasVenta());
+					datoPromocion.setValue("artprecioventabnormal", listaPromocion.getPromocion()[i].getArtPrecioVentaNormal());
 					datoPromocion.save();
 				}
 				Log.e("TT", "promociones guardadas = " + tamano);
@@ -301,6 +310,7 @@ public class RequestDB {
 			try
 			{			
 			 int longitud2 = cliente.length;
+			 Log.e("TT", "cantidad de clientes a guardar = " + longitud2);
 			 for(int d=0; d<longitud2; d++)
 			 {
 				DataFramework.getInstance().open(context, "com.researchmobile.todoterreno.pedidos.view");
@@ -317,22 +327,15 @@ public class RequestDB {
 				datocliente.setValue("clilimite", cliente[d].getCliLimite());
 				datocliente.setValue("cliSaldo", cliente[d].getCliSaldo());
 				datocliente.setValue("cliRuta", cliente[d].getCliRuta());
-//				datocliente.setValue("cliDireccionParticular", cliente[d].getCliDireccionParticular());
 				datocliente.setValue("cliNit", cliente[d].getCliNit());
 				datocliente.setValue("Semana", cliente[d].getSemana());
 				datocliente.setValue("diaVisita", cliente[d].getDiaVisita());
-//				datocliente.setValue("visitado", cliente[d].getVisitado());
 				datocliente.setValue("fechaVisitado", cliente[d].getFechaVisitado());
-				
-//				datocliente.setValue("codCatCliete", cliente[d].getCodCatCliete());
-//				datocliente.setValue("cliFax", cliente[d].getCliFax());
-//				datocliente.setValue("cliEmail", cliente[d].getCliEmail());
-//				datocliente.setValue("cliWeb", cliente[d].getCliWeb());
-//				datocliente.setValue("fingreso", cliente[d].getFingreso());
-//				datocliente.setValue("cliCheque", cliente[d].getCliCheque());				
-//				datocliente.setValue("cliTelefonoCasa", cliente[d].getCliTelefonoCasa());
-//				datocliente.setValue("cliTelefonoMovil", cliente[d].getCliTelefonoMovil());
+				datocliente.setValue("secuencia", cliente[d].getSecuencia());
+
+
 				datocliente.save();
+				Log.e("TT", "RequestDB - clientes guardados = " + longitud2);
 			 }
 			
 			}
@@ -701,11 +704,11 @@ public class RequestDB {
 			try
 			{
 				DataFramework.getInstance().open(context, "com.researchmobile.todoterreno.pedidos.view");
-				List<Entity> categories = DataFramework.getInstance().getEntityList("cliente");
+//				List<Entity> categories = DataFramework.getInstance().getEntityList("cliente");
+				List<Entity> categories = DataFramework.getInstance().getEntityList("cliente", null, "secuencia asc");
 					Iterator e = categories.iterator();
 					while(e.hasNext())
 					{
-					
 					 Entity d = (Entity)e.next();
 					 String codigo = d.getString("cliCodigo");
 					 if (codigo.equalsIgnoreCase(codigocliente)){
@@ -713,17 +716,15 @@ public class RequestDB {
 						 cliente.setCliCodigo(d.getString("cliCodigo"));
 						 cliente.setCliEmpresa(d.getString("cliEmpresa"));
 						 cliente.setCliContacto(d.getString("cliContacto"));
-//						 cliente.setCodCatCliete(d.getString("codCatCliete"));
 						 cliente.setCliDireccion(d.getString("cliDireccion"));
 						 cliente.setCliTelefono(d.getString("cliTelefono"));
-//						 cliente.setCliFax(d.getString("cliFax"));
 						 cliente.setCliDesnormal(d.getString("cliDesnormal"));
 						 cliente.setCliDes1(d.getString("cliDes1"));
 						 cliente.setCliDes2(d.getString("cliDes2"));
 						 cliente.setCliDes3(d.getString("cliDes3"));
-//						 cliente.setCliContacto(d.getString("cliContacto"));
 						 cliente.setFechaVisitado(d.getString("fechaVisitado"));
 						 cliente.setCliRuta(d.getString("cliRuta"));
+						 
 						 return cliente;
 					 }
 					 
@@ -853,13 +854,13 @@ public class RequestDB {
 			}
 		}
 		
-		public void eliminarPromociones(Context context) {
+		public boolean eliminarPromociones(Context context) {
 			try{
 				DataFramework.getInstance().open(context, "com.researchmobile.todoterreno.pedidos.view");
 				DataFramework.getInstance().emptyTable("promocion");
-				
-				}catch(Exception e){
-				
+				return true;
+			}catch(Exception e){
+				return false;
 				}
 		}
 		
@@ -1508,7 +1509,8 @@ public class RequestDB {
 			Log.e("TT", "RequestDB.buscaBoni = " + idArticulo);
 			try {
 				DataFramework.getInstance().open(context, "com.researchmobile.todoterreno.pedidos.view");
-				List<Entity> boni = DataFramework.getInstance().getEntityList("promocion");
+				List<Entity> boni = DataFramework.getInstance().getEntityList("promocion", "artcodigo = '" + idArticulo + "'", "artcodigob DESC");
+				
 				int tamano = boni.size();
 				RespuestaWS respuesta = new RespuestaWS();
 				respuesta.setResultado(false);
@@ -1529,14 +1531,16 @@ public class RequestDB {
 							respuesta.setMensaje("Promociones disponibles");
 							temp.setArtCodigo(dato.getString("artcodigo"));
 							temp.setArtDescripcionBoni(dato.getString("artdescripcionb"));
-				 			temp.setFardosCompra(Integer.parseInt(dato.getString("fardosc")));
-				 			temp.setUnidadesCompra(Integer.parseInt(dato.getString("unidadesc")));
+				 			temp.setFardosCompra(dato.getInt("fardosc"));
+				 			temp.setUnidadesCompra(dato.getInt("unidadesc"));
+				 			temp.setTotalUnidades(dato.getInt("totalunidades"));
 				 			temp.setArtCodigoBoni(dato.getString("artcodigob"));
 				 			temp.setFardosBoni(Integer.parseInt(dato.getString("fardosb")));
 				 			temp.setUnidadesBoni(Integer.parseInt(dato.getString("unidadesb")));
 				 			temp.setPrecioVentaBoni(Float.parseFloat(dato.getString("precioventab")));
 				 			temp.setLimiteOfertaCliente(Integer.parseInt(dato.getString("limiteofertascli")));
 				 			temp.setLimiteOfertasVenta(Integer.parseInt(dato.getString("limiteofertasven")));
+				 			temp.setArtPrecioVentaNormal(Float.parseFloat(dato.getString("artprecioventabnormal")));
 				 			promocion[i] = temp;
 						}
 						i++;
@@ -1551,6 +1555,7 @@ public class RequestDB {
 				return null;
 			}
 		}
+
 		
 		public ListaCategoria buscaCategoria(Context context) {
 			try

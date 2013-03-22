@@ -21,7 +21,7 @@ public class ConnectWS {
     	Log.e("TT", "ConnectWS.obtenerJson");
         JSONObject jsonObject = null;
         try {
-            URL urlCon = new URL("http", IP_SERVER, PUERTO, "/megainfo/ws/" + url);
+            URL urlCon = new URL("http", IP_SERVER, "/megainfo/ws/" + url);
             HttpURLConnection urlConnection = (HttpURLConnection) urlCon.openConnection();
             System.out.println("Login - url = " + urlCon);
             InputStream inputStream = urlConnection.getInputStream();
@@ -40,7 +40,7 @@ public class ConnectWS {
     	Log.e("TT", "ConnectWS.obtenerJson");
         JSONObject jsonObject = null;
         try {
-            URL urlCon = new URL("http", IP_SERVER, PUERTO, "/megainfo/" + url);
+            URL urlCon = new URL("http", IP_SERVER, "/megainfo/ws/" + url);
             HttpURLConnection urlConnection = (HttpURLConnection) urlCon.openConnection();
             System.out.println("ENVIAR_PEDIDO - url = " + urlCon);
             InputStream inputStream = urlConnection.getInputStream();
@@ -58,7 +58,7 @@ public class ConnectWS {
     public static JSONObject enviaMotivoJson(String url) {
 		JSONObject jsonObject = null;
 		try{
-			URL urlCon = new URL("http", IP_SERVER, PUERTO, "/megainfo/ws/" + url);
+			URL urlCon = new URL("http", IP_SERVER, "/megainfo/ws/" + url);
             HttpURLConnection urlConnection = (HttpURLConnection) urlCon.openConnection();
             System.out.println("ENVIAR_MOTIVO - url = " + urlCon);
             InputStream inputStream = urlConnection.getInputStream();
@@ -76,7 +76,7 @@ public class ConnectWS {
     public static JSONObject clienteVisitado(String url) {
     	JSONObject jsonObject = null;
 		try{
-			URL urlCon = new URL("http", IP_SERVER, PUERTO, "/megainfo/ws/" + url);
+			URL urlCon = new URL("http", IP_SERVER, "/megainfo/ws/" + url);
             HttpURLConnection urlConnection = (HttpURLConnection) urlCon.openConnection();
             System.out.println("ENVIAR_CLIENTE VISITADO - url = " + urlCon);
             InputStream inputStream = urlConnection.getInputStream();
@@ -95,7 +95,7 @@ public class ConnectWS {
     public static JSONObject enviaNuevoCliente(String url) {
     	JSONObject jsonObject = null;
 		try{
-			URL urlCon = new URL("http", IP_SERVER, PUERTO, "/megainfo/ws/" + url);
+			URL urlCon = new URL("http", IP_SERVER, "/megainfo/ws/" + url);
             HttpURLConnection urlConnection = (HttpURLConnection) urlCon.openConnection();
             System.out.println("ENVIAR_CLIENTE NUEVO - url = " + urlCon);
             InputStream inputStream = urlConnection.getInputStream();

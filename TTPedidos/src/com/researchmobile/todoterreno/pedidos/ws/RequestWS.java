@@ -30,7 +30,7 @@ public class RequestWS {
 	private static String WS_LOGIN = "ws_login.php?a=login&";
 	private static String WS_CLIENTES = "ws_clientes.php?";
 	private static String WS_PRODUCTOS = "ws_articulos.php?a=catalogo&idportafolio=";
-	private static String WS_ENVIO = "json.php?username=";
+	private static String WS_ENVIO = "ws_pedidos.php?username=";
 	private static String WS_ENVIAMOTIVO = "ws_noventa.php?cliente=";
 	private static String WS_CATEGORIAS = "ws_categorias.php?";
 	private static String WS_NUEVOCLIENTE = "ws_clientenuevo.php?idUsuario=";
@@ -91,7 +91,8 @@ public class RequestWS {
 						int tamano = portafoliosJsonArray.length();
 						Portafolio[] portafolios = new Portafolio[tamano];
 						for(int i=0; i < tamano; i++){
-						JSONObject portafoliosJsonObject = portafoliosJsonArray.getJSONObject(0);
+							
+						JSONObject portafoliosJsonObject = portafoliosJsonArray.getJSONObject(i);
 						Portafolio temp = new Portafolio();
 						temp.setIdPortafolio(nullToString(portafoliosJsonObject.getString("IDportafolio")));
 						temp.setDescripcion(nullToString(portafoliosJsonObject.getString("descripcion")));
@@ -241,9 +242,10 @@ public class RequestWS {
 							promocionTemp.setArtDescripcionBoni(jsonTemp.getString("artdescripcionb"));
 							promocionTemp.setFardosBoni(jsonTemp.getInt("fardosb"));
 							promocionTemp.setUnidadesBoni(jsonTemp.getInt("unidadesb"));
-							promocionTemp.setPrecioVentaBoni(jsonTemp.getInt("precioventab"));
+							promocionTemp.setPrecioVentaBoni(Float.parseFloat(jsonTemp.getString("precioventab")));
 							promocionTemp.setLimiteOfertaCliente(jsonTemp.getInt("limiteofertascli"));
 							promocionTemp.setLimiteOfertasVenta(jsonTemp.getInt("limiteofertasven"));
+							promocionTemp.setArtPrecioVentaNormal(Float.parseFloat(jsonTemp.getString("artprecioventabnormal")));
 							promocion[i] = promocionTemp;
 							Log.e("TT", "promocione capturada = " + promocionTemp.getArtCodigo());
 						}
@@ -304,8 +306,11 @@ public class RequestWS {
 							JSONObject clientesJsonObject = clientesJsonArray.getJSONObject(i);
 							Cliente temp = new Cliente();
 							temp.setCliCodigo(nullToString(clientesJsonObject.getString("clicodigo")));
+							Log.e("TT", "cargando datos 1");
 							temp.setCliEmpresa(nullToString(clientesJsonObject.getString("cliempresa")));
+							Log.e("TT", "cargando datos 2");
 							temp.setCliContacto(nullToString(clientesJsonObject.getString("clicontacto")));
+							Log.e("TT", "cargando datos 3");
 							temp.setCliDireccion(nullToString(clientesJsonObject.getString("clidireccion")));
 							temp.setCliNit(nullToString(clientesJsonObject.getString("clinit")));
 							temp.setCliTelefono(nullToString(clientesJsonObject.getString("clitelefono")));
@@ -318,7 +323,8 @@ public class RequestWS {
 							temp.setCliDes3(nullToString(clientesJsonObject.getString("clides3")));
 							temp.setCliSaldo(nullToString(clientesJsonObject.getString("clisaldo")));
 							temp.setFechaVisitado(nullToString(clientesJsonObject.getString("fechavisitado")));
-														
+							temp.setSecuencia(nullToInteger(clientesJsonObject.getString("secuencia")));
+							Log.e("TT", "cargando datos 4");
 							clientes[i]=temp;
 							
 						} listaClientes.setCliente(clientes);

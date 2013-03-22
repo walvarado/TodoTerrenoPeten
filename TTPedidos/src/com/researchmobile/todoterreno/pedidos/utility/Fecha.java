@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.util.Log;
+
 public class Fecha {
 	private Calendar calendar = Calendar.getInstance();
 	
@@ -11,6 +13,48 @@ public class Fecha {
 		int semana = getCalendar().get(Calendar.WEEK_OF_MONTH);
 		
 		return semana;
+	}
+	
+	public int semanaParImparAnio(){
+		
+		int semana = getCalendar().get(Calendar.WEEK_OF_YEAR);
+		if ((semana % 2) == 0){
+			Log.e("TT", "semana par" );
+			return 2; 
+		}else{
+			Log.e("TT", "semana impar" );
+			return 1;
+		}
+		
+	}
+	
+	public int semanaUnoDos (){
+		int semana = getCalendar().get(Calendar.WEEK_OF_MONTH);
+		int resultado = 0;
+		switch(semana){
+		case 1:
+			resultado = 1;
+			break;
+		case 2:
+			resultado = 2;
+			break;
+		case 3:
+			resultado = 1;
+			break;
+		case 4:
+			resultado = 2;
+			break;
+		case 5:
+			resultado = 1;
+			break;
+		case 6:
+			resultado = 2;
+			break;
+		default:
+			resultado = 1;
+			break;
+		}
+		return resultado;
 	}
 	
 	public int semanaAnio() {

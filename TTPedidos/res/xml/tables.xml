@@ -1,4 +1,4 @@
-    <database name="todoterreno034" version="1">
+    <database name="todoterreno041" version="1">
 	
 	<!-- U S U A R I O -->
     <table name="usuario" to-string="%usuario%">
@@ -66,7 +66,8 @@
     <field name="Semana"			obligatory="false"	type="text"/>
 	<field name="diaVisita"			obligatory="false" 	type="text" size="80"/>
 	<field name="fechaVisitado"		obligatory="false" 	type="text" size="80"/>
-	<field name="visitado"			obligatory="false"	type="integer"/>    
+	<field name="visitado"			obligatory="false"	type="integer"/>
+	<field name="secuencia"			obligatory="false"	type="integer"/>    
         
     </table>
     
@@ -83,6 +84,8 @@
         <field name="precioventab"		obligatory="false"	type="text"	size="20"/>
         <field name="limiteofertascli"	obligatory="false"	type="integer"/>
         <field name="limiteofertasven"	obligatory="false"	type="integer"/>
+        <field name="totalunidades"		obligatory="false"	type="integer"/>
+        <field name="artprecioventabnormal"		obligatory="false"	type="text"	size="20"/>
     </table>
     
     <!-- P O R T A F O L I O -->
@@ -262,6 +265,79 @@
 	    <field name="movcredito"		obligatory="false" type="float"/>
 	    <field name="clicodigo"			obligatory="false" type="text" size="20"/>
 		<field name="factura"			obligatory="false" type="text" size="20"/>
+		<field name="movfacturado"		obligatory="false" type="boolean"/>
+		<field name="primerdato"		obligatory="false" type="text" size="20"/>
+		<field name="movnotas"			obligatory="false" type="text" size="60"/>
+		<field name="movcerrado"		obligatory="false" type="integer"/>
+		<field name="cajacodigo"		obligatory="false" type="integer"/>
+		<field name="movpagado"			obligatory="false" type="float"/>
+		<field name="pagodocumento"		obligatory="false" type="text" size="20"/>
+		<field name="movfechavence"		obligatory="false" type="text" size="20"/>
+		<field name="cierremes"			obligatory="false" type="integer"/>
+		<field name="vendedor"			obligatory="false" type="text" size="20"/>
+		<field name="ruta"				obligatory="false" type="text" size="20"/>
+		<field name="idrepartidor"		obligatory="false" type="text" size="20"/>
+		<!-- campos agregados para manejar en el REQUESTDB -->
+		<field name="facturaimpresa"	obligatory="false" type="integer"/>
+		<field name="facturarechazo"	obligatory="false" type="integer"/>
+	</table>
+	
+	<!-- D E T A L L E  	F A C T U R A  -->
+	
+	<table name="detallefactura" to-string="%detallefactura%">
+	    
+	    <field name="id"					obligatory="false" type="integer"/>
+	    <field name="movdocumento"			obligatory="false" type="text" size="20"/>
+		<field name="artcodigo"				obligatory="false" type="text" size="20"/>
+		<field name="artunidadesfardo"		obligatory="false" type="integer"/>
+		<field name="movunidades"			obligatory="false" type="integer"/>
+		<field name="movunidadesentregadas"	obligatory="false" type="integer"/>
+		<field name="movprecio"				obligatory="false" type="float"/>
+		<field name="movfechaentregar"		obligatory="false" type="text" size="20"/>
+		<field name="cajacodigo"			obligatory="false" type="integer"/>
+		<field name="mocostoultimo"			obligatory="false" type="float"/>
+		<field name="movunidevueltos"		obligatory="false" type="integer"/>
+		<field name="movnotas"				obligatory="false" type="text" size="60"/>
+		<field name="vendedor"				obligatory="false" type="text" size="20"/>
+		<field name="ruta"					obligatory="false" type="text" size="20"/>
+		<field name="idrepartidor"			obligatory="false" type="text" size="20"/>		
+	</table>
+	
+	<!-- M O D U L O     F A C T U R A C I O N -->	<!-- M O D U L O     F A C T U R A C I O N -->	<!-- M O D U L O     F A C T U R A C I O N -->
+	
+	<!-- R E P A R T I D O R -->
+    <table name="repartidor" to-string="%repartidor%">
+    
+    <field name="idrepartidor"		obligatory="false" 	type="text" size="20"/>    
+    <field name="clave"				obligatory="false" 	type="text" size="20"/>    
+    <field name="repartidor"		obligatory="false" 	type="text" size="80"/>    
+    <field name="identificacion"	obligatory="false" 	type="text" size="15"/>
+    <field name="licencia"			obligatory="false" 	type="text" size="15"/>
+    <field name="direccion"			obligatory="false" 	type="text" size="80"/>    
+    <field name="telefono"			obligatory="false" 	type="text" size="11"/>    
+    <field name="saldo"				obligatory="false" 	type="text" size="10"/>    
+    </table>
+     
+	<!-- F A C T U R A --> 
+	<table name="factura" to-string="%factura%">
+	    
+	    <field name="movdocumento"		obligatory="false" type="text" size="20"/>
+	    <field name="movfecha"			obligatory="false" type="text" size="20"/>
+	    <field name="movhora"			obligatory="false" type="text" size="20"/>
+	    <field name="movtipo"			obligatory="false" type="integer"/>
+	    <field name="movanulado"		obligatory="false" type="boolean"/>
+	    <field name="movestatus"		obligatory="false" type="integer"/>
+	    <field name="movtotal"			obligatory="false" type="float"/>
+	    <field name="movefectivo"		obligatory="false" type="float"/>
+	    <field name="movcheque"			obligatory="false" type="float"/>
+	    <field name="movcredito"		obligatory="false" type="float"/>
+	    <field name="clicodigo"			obligatory="false" type="text" size="20"/>
+	    <field name="clicontacto"			obligatory="false" type="text" size="20"/>
+	    <field name="cliempresa"			obligatory="false" type="text" size="20"/>
+	    <field name="clitelefono"			obligatory="false" type="text" size="20"/>
+	    <field name="clidireccion"			obligatory="false" type="text" size="20"/>
+	    <field name="clinit"			obligatory="false" type="text" size="20"/>
+	    <field name="factura"			obligatory="false" type="text" size="20"/>
 		<field name="movfacturado"		obligatory="false" type="boolean"/>
 		<field name="primerdato"		obligatory="false" type="text" size="20"/>
 		<field name="movnotas"			obligatory="false" type="text" size="60"/>

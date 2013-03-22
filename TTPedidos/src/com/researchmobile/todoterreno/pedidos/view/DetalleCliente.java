@@ -121,8 +121,6 @@ public class DetalleCliente extends Activity implements OnClickListener{
 		case R.id.detalle_cliente_menu_tomar_pedido_opcion:
 			TomarPedido();
 			return true;
-		case R.id.detalle_cliente_menu_motivo_nocompra_opcion:
-			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

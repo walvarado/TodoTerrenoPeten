@@ -16,6 +16,8 @@ public class Promocion implements Serializable{
 	private float precioVentaBoni;
 	private int limiteOfertaCliente;
 	private int limiteOfertasVenta;
+	private int totalUnidades;
+	private float artPrecioVentaNormal;
 	public String getArtCodigo() {
 		return artCodigo;
 	}
@@ -82,6 +84,16 @@ public class Promocion implements Serializable{
 	public void setLimiteOfertasVenta(int limiteOfertasVenta) {
 		this.limiteOfertasVenta = limiteOfertasVenta;
 	}
-
-	
+	public int getTotalUnidades() {
+		return totalUnidades;
+	}
+	public void setTotalUnidades(int totalUnidades) {
+		this.totalUnidades = totalUnidades;
+	}
+	public float getArtPrecioVentaNormal() {
+		return artPrecioVentaNormal;
+	}
+	public void setArtPrecioVentaNormal(float artPrecioVentaNormal) {
+		this.artPrecioVentaNormal = artPrecioVentaNormal;
+	}
 }

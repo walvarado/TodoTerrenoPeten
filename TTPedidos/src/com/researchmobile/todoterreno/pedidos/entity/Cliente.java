@@ -30,6 +30,7 @@ public class Cliente implements Serializable{
 	private String Semana;
 	private String diaVisita;
 	private String fechaVisitado;
+	private int secuencia;
 	
 	private RespuestaWS respuesta;
 	private String visitado;
@@ -195,6 +196,12 @@ public class Cliente implements Serializable{
 	}
 	public void setFechaVisitado(String fechaVisitado) {
 		this.fechaVisitado = fechaVisitado;
+	}
+	public int getSecuencia() {
+		return secuencia;
+	}
+	public void setSecuencia(int secuencia) {
+		this.secuencia = secuencia;
 	}
 	
 	

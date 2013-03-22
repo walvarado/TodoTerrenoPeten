@@ -2,6 +2,8 @@ package com.researchmobile.todoterreno.pedidos.ws;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import android.content.Context;
 import android.util.Log;
@@ -19,6 +21,7 @@ import com.researchmobile.todoterreno.pedidos.entity.LoginEntity;
 import com.researchmobile.todoterreno.pedidos.entity.NoVenta;
 import com.researchmobile.todoterreno.pedidos.entity.Pedido;
 import com.researchmobile.todoterreno.pedidos.entity.RespuestaWS;
+import com.researchmobile.todoterreno.pedidos.entity.Total;
 import com.researchmobile.todoterreno.pedidos.entity.User;
 import com.researchmobile.todoterreno.pedidos.entity.Vendedor;
 import com.researchmobile.todoterreno.pedidos.utility.ConnectState;
@@ -163,7 +166,7 @@ public class Peticion {
 				}
 			}while(listaArticulos.getArticulo().length < 1 && intentos < 3);
 			if (intentos > 2 ){
-				limpiaDB(context);
+//				limpiaDB(context);
 			}else{
 				intentos = 0;
 			}
@@ -252,6 +255,7 @@ public class Peticion {
 			String visitado = cliente[i].getVisitado();
 			if (visitado.equalsIgnoreCase("null") || !visitado.equalsIgnoreCase(fecha.fechaInversa())){
 				if (rm.semanaVisitaHoy(cliente[i].getSemana()) && rm.diaVisitaHoy(cliente[i].getDiaVisita())){
+					Log.e("TT", "mostrar clientes, si califica");
 					HashMap<String, String> map = new HashMap<String, String>();
 					map.put("codigoCliente", cliente[i].getCliCodigo());
 			        map.put("empresa", cliente[i].getCliEmpresa());
@@ -303,13 +307,15 @@ public class Peticion {
 		return mylist;
 	}
 	
+	@SuppressWarnings("null")
 	public ArrayList<HashMap<String, String>> pedidoTemp(Context context, int numeroPedido) {
+		Total.setTotalPromocion(0);
 		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
 		DetallePedido[] articulo = requestDB.buscaDetallePedido(context, numeroPedido);
-		
+		HashMap<String, String> map = null;
 		int tamano = articulo.length;
 		for (int i = 0; i < tamano; i++){
-			HashMap<String, String> map = new HashMap<String, String>();
+			map = new HashMap<String, String>();
         	map.put("codigoProducto", articulo[i].getCodigo());
         	map.put("nombreProducto", articulo[i].getNombre());
         	map.put("cajas", String.valueOf(articulo[i].getCaja()));
@@ -322,41 +328,152 @@ public class Peticion {
         	mylist.add(map);
 //        	Verificar bonificacion de este artículo
         	ListaPromocion listaPromocion = new ListaPromocion();
+        	Log.e("TT", "test1");
         	listaPromocion = buscaBoni(context, articulo[i].getCodigo());
+        	Log.e("TT", "test2");
 //        	Si encuentra artículos bonificados para este artículo, agrega el artículo bonificado
         	if (listaPromocion.getRespuesta().isResultado()){
+        		List<String> listAgregado = new ArrayList<String>();
+        		int tamanoPromocion = listaPromocion.getPromocion().length;
         		
-        		int unidadesCompra = articulo[i].getTotalUnidades();
-        		int fardosBoni = listaPromocion.getPromocion()[0].getFardosBoni();
-        		int unidadesBoni = listaPromocion.getPromocion()[0].getUnidadesBoni();
-        		int totalUnidadesBoni = ((fardosBoni * unidadesBoni) + unidadesBoni);
-        		float precioBoni = listaPromocion.getPromocion()[0].getPrecioVentaBoni();
-        		
-        		Log.e("TT", "unidadesCompra = " + unidadesCompra);
-        		Log.e("TT", "fardosBoni = " + fardosBoni);
-        		Log.e("TT", "unidadesBoni = " + unidadesBoni);
-        		Log.e("TT", "totalUndiadeBoni = " + totalUnidadesBoni);
-        		if (unidadesCompra > totalUnidadesBoni){
-        			int cantidadBoni = unidadesCompra / totalUnidadesBoni;
-//        			for (int a = 0; a < cantidadBoni; a++){
-        				HashMap<String, String> mapBoni = new HashMap<String, String>();
-                    	mapBoni.put("codigoProducto", "BONI");
-                    	mapBoni.put("nombreProducto", listaPromocion.getPromocion()[0].getArtDescripcionBoni());
-                    	mapBoni.put("cajas", String.valueOf(listaPromocion.getPromocion()[0].getFardosBoni()));
-                    	mapBoni.put("unidades", String.valueOf(cantidadBoni * listaPromocion.getPromocion()[0].getUnidadesBoni()));
-                    	mapBoni.put("valor", formatDecimal.convierteFloat(listaPromocion.getPromocion()[0].getPrecioVentaBoni()));
-                    	mapBoni.put("presentacion", String.valueOf(listaPromocion.getPromocion()[0].getUnidadesBoni()));
-                    	mapBoni.put("existencia", "0");
-                    	mapBoni.put("bonificacion", "0");
-                    	mapBoni.put("total", formatDecimal.convierteFloat(precioBoni * totalUnidadesBoni));
-                    	mylist.add(mapBoni);
-//        			}
+        		for (int k = 0; k < tamanoPromocion; k++){
+        			int unidadesCompra = articulo[i].getTotalUnidades();
+        			int totalUnidadesAplicaBoni = (listaPromocion.getPromocion()[k].getTotalUnidades());
+        			int fardosBoni = listaPromocion.getPromocion()[k].getFardosBoni();
+            		int unidadesBoni = listaPromocion.getPromocion()[k].getUnidadesBoni();
+            		int totalUnidadesBoni = ((fardosBoni * listaPromocion.getPromocion()[k].getArtUnidadesFardo()) + unidadesBoni);
+            		float precioBoni = listaPromocion.getPromocion()[k].getPrecioVentaBoni();
+            		
+            		Log.e("TT", "unidadesCompra = " + unidadesCompra);
+            		Log.e("TT", "fardosBoni = " + fardosBoni);
+            		Log.e("TT", "unidadesBoni = " + unidadesBoni);
+            		Log.e("TT", "totalUndiadeBoni = " + totalUnidadesBoni);
+        			if (listAgregado.size() > 0){
+        				
+        				Iterator iter = listAgregado.iterator();
+        				while (iter.hasNext()){
+        				  String codAgregado = iter.next().toString();
+        				  System.out.println("agregado = " + codAgregado);
+        				  if (!codAgregado.equalsIgnoreCase(listaPromocion.getPromocion()[k].getArtCodigoBoni())){
+        					  
+        					  System.out.println("agregado = " + codAgregado + " -- " + listaPromocion.getPromocion()[k].getArtCodigoBoni());
+        					  if (unidadesCompra >= totalUnidadesAplicaBoni){
+        	            			int cantidadBoni = unidadesCompra / totalUnidadesAplicaBoni;
+        	            			Log.e("TT", "cantidadBoni = 2" + cantidadBoni);
+        	            				HashMap<String, String> mapBoni = new HashMap<String, String>();
+        	                        	mapBoni.put("codigoProducto", "BONI");
+        	                        	mapBoni.put("nombreProducto", listaPromocion.getPromocion()[k].getArtDescripcionBoni());
+        	                        	mapBoni.put("cajas", String.valueOf(cantidadBoni * listaPromocion.getPromocion()[k].getFardosBoni()));
+        	                        	if (listaPromocion.getPromocion()[k].getFardosBoni() > 0){
+        	                        		mapBoni.put("unidades", String.valueOf(cantidadBoni * unidadesBoni));
+        	                        	}else{
+        	                        		mapBoni.put("unidades", String.valueOf(cantidadBoni * totalUnidadesBoni));
+        	                        	}
+        	                        	mapBoni.put("valor", formatDecimal.convierteFloat(listaPromocion.getPromocion()[k].getPrecioVentaBoni()));
+        	                        	mapBoni.put("presentacion", String.valueOf(listaPromocion.getPromocion()[k].getUnidadesBoni()));
+        	                        	mapBoni.put("existencia", "0");
+        	                        	mapBoni.put("bonificacion", "0");
+        	                        	mapBoni.put("total", formatDecimal.convierteFloat(listaPromocion.getPromocion()[k].getPrecioVentaBoni() * totalUnidadesBoni * cantidadBoni));
+        	                        	mylist.add(mapBoni);
+        	                        	float totalTemp = precioBoni * totalUnidadesBoni * cantidadBoni;
+        	                        	totalTemp = totalTemp + Total.getTotalPromocion();
+        	                        	Total.setTotalPromocion(totalTemp);
+        	                        	listAgregado.add(listaPromocion.getPromocion()[k].getArtCodigoBoni());
+        	                    }
+        				  }
+        				}
+        			}else if (unidadesCompra >= totalUnidadesAplicaBoni){
+                			int cantidadBoni = unidadesCompra / totalUnidadesAplicaBoni;
+                			Log.e("TT", "cantidadBoni = 1" + cantidadBoni);
+//                			for (int a = 0; a < cantidadBoni; a++){
+                				HashMap<String, String> mapBoni = new HashMap<String, String>();
+                            	mapBoni.put("codigoProducto", "BONI");
+                            	mapBoni.put("nombreProducto", listaPromocion.getPromocion()[k].getArtDescripcionBoni());
+                            	mapBoni.put("cajas", String.valueOf(cantidadBoni * listaPromocion.getPromocion()[k].getFardosBoni()));
+                            	if (listaPromocion.getPromocion()[k].getFardosBoni() > 0){
+                            		mapBoni.put("unidades", String.valueOf(cantidadBoni * unidadesBoni));
+                            	}else{
+                            		mapBoni.put("unidades", String.valueOf(cantidadBoni * totalUnidadesBoni));
+                            	}
+                            	mapBoni.put("valor", formatDecimal.convierteFloat(listaPromocion.getPromocion()[k].getPrecioVentaBoni()));
+                            	mapBoni.put("presentacion", String.valueOf(listaPromocion.getPromocion()[k].getUnidadesBoni()));
+                            	mapBoni.put("existencia", "0");
+                            	mapBoni.put("bonificacion", "0");
+                            	mapBoni.put("total", formatDecimal.convierteFloat(listaPromocion.getPromocion()[k].getPrecioVentaBoni() * totalUnidadesBoni * cantidadBoni));
+                            	mylist.add(mapBoni);
+                            	float totalTemp = precioBoni * totalUnidadesBoni;
+                            	totalTemp = precioBoni * totalUnidadesBoni * cantidadBoni;
+                            	Total.setTotalPromocion(totalTemp);
+                            	listAgregado.add(listaPromocion.getPromocion()[k].getArtCodigoBoni());
+//                			}
+                		}
+        			
         		}
         	}
         }
+		Log.e("TT", "tamaño list = " + mylist.size());
+		
 		return mylist;
 	}
 
+	public void totalPromo(Context context, int numeroPedido) {
+		Total.setTotalPromocion(0);
+		DetallePedido[] articulo = requestDB.buscaDetallePedido(context, numeroPedido);
+		int tamano = articulo.length;
+		for (int i = 0; i < tamano; i++){
+			ListaPromocion listaPromocion = new ListaPromocion();
+        	Log.e("TT", "test1");
+        	listaPromocion = buscaBoni(context, articulo[i].getCodigo());
+        	Log.e("TT", "test2");
+//        	Si encuentra artículos bonificados para este artículo, agrega el artículo bonificado
+        	if (listaPromocion.getRespuesta().isResultado()){
+        		List<String> listAgregado = new ArrayList<String>();
+        		int tamanoPromocion = listaPromocion.getPromocion().length;
+        		
+        		for (int k = 0; k < tamanoPromocion; k++){
+        			int unidadesCompra = articulo[i].getTotalUnidades();
+        			int totalUnidadesAplicaBoni = (listaPromocion.getPromocion()[k].getTotalUnidades());
+        			int fardosBoni = listaPromocion.getPromocion()[k].getFardosBoni();
+            		int unidadesBoni = listaPromocion.getPromocion()[k].getUnidadesBoni();
+            		int totalUnidadesBoni = ((fardosBoni * listaPromocion.getPromocion()[k].getArtUnidadesFardo()) + unidadesBoni);
+            		float precioBoni = listaPromocion.getPromocion()[k].getPrecioVentaBoni();
+            		
+            		Log.e("TT", "unidadesCompra = " + unidadesCompra);
+            		Log.e("TT", "fardosBoni = " + fardosBoni);
+            		Log.e("TT", "unidadesBoni = " + unidadesBoni);
+            		Log.e("TT", "totalUndiadeBoni = " + totalUnidadesBoni);
+        			if (listAgregado.size() > 0){
+        				
+        				Iterator iter = listAgregado.iterator();
+        				while (iter.hasNext()){
+        				  String codAgregado = iter.next().toString();
+        				  System.out.println("agregado = " + codAgregado);
+        				  if (!codAgregado.equalsIgnoreCase(listaPromocion.getPromocion()[k].getArtCodigoBoni())){
+        					  
+        					  System.out.println("agregado = " + codAgregado + " -- " + listaPromocion.getPromocion()[k].getArtCodigoBoni());
+        					  if (unidadesCompra >= totalUnidadesAplicaBoni){
+        	            			int cantidadBoni = unidadesCompra / totalUnidadesAplicaBoni;
+        	            			Log.e("TT", "cantidadBoni = 2" + cantidadBoni);
+        	            				float totalTemp = precioBoni * totalUnidadesBoni * cantidadBoni;
+        	                        	totalTemp = totalTemp + Total.getTotalPromocion();
+        	                        	Total.setTotalPromocion(totalTemp);
+        	                        	listAgregado.add(listaPromocion.getPromocion()[k].getArtCodigoBoni());
+        	                    }
+        				  }
+        				}
+        			}else if (unidadesCompra >= totalUnidadesAplicaBoni){
+                			int cantidadBoni = unidadesCompra / totalUnidadesAplicaBoni;
+                			Log.e("TT", "cantidadBoni = 1" + cantidadBoni);
+                				float totalTemp = precioBoni * totalUnidadesBoni;
+                            	totalTemp = precioBoni * totalUnidadesBoni * cantidadBoni;
+                            	Total.setTotalPromocion(totalTemp);
+                            	listAgregado.add(listaPromocion.getPromocion()[k].getArtCodigoBoni());
+                		}
+        		}
+        	}
+        }
+	}
+	
 	public ArrayList<HashMap<String, String>> ListaClientesVisitados (Context context){
 		ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
 		Cliente[] cliente = requestDB.clientePendienteDB(context);
@@ -476,7 +593,7 @@ public class Peticion {
 			vendedor = requestDB.vendedorDB(context);
 			RespuestaWS respuesta = new RespuestaWS();
 			respuesta = requestWS.enviaPedido(context, pedido, ruta, vendedor.getIdusuario());
-			if (!respuesta.isResultado()){
+			if (respuesta.isResultado()){
 				requestWS.clienteVisitado(pedido.getEncabezadoPedido().getCodigoCliente());
 				Log.e("TT", "resultado del envio = " + respuesta.getMensaje());
 				requestDB.actualizarCampoVisitado(context, encabezado.getCodigoCliente());
@@ -537,11 +654,16 @@ public class Peticion {
 		try{
 			if (connectState.isConnectedToInternet(context)){
 				
-				Mail m = new Mail("ttmp@researchmonile.co", "ttmp1234");
-				  String[] toArr = {"todoterrenoguate@hotmail.com", "sergiorene_5@yahoo.es", "memiliob@gmail.com", "wlevy@researchmobile.co", "walvarado@researchmobile.co"};
+				System.out.println("enviarNuevoCliente.....");
+				Mail m = new Mail("ttmp@researchmobile.co", "ttmp1234");
+//				Mail m = new Mail("ttmp@researchmobile.co", "ttmp1234");
+				System.out.println("enviarNuevoCliente.....");
+				
+				String[] toArr = {"sergiorene_5@yahoo.es", "memiliob@gmail.com", "jhramiretodoterreno@yahoo.es", "wlevy@researchmobile.co", "walvarado@researchmobile.co"};
+//			      String[] toArr = {"eclaudio@grupotodoterreno.com", "william.ale20@gmail.com", "wlevy@researchmobile.co", "walvarado@researchmobile.co"};
 //			      "eclaudio@grupotodoterreno.com", "william.ale20@gmail.com", "wlevy@researchmobile.co", 
 			      m.set_to(toArr); 
-			      m.set_from("todoterrenosc@gmail.com"); 
+			      m.set_from("ttmp@researchmobile.co"); 
 			      m.set_subject("Peticion de nuevo Cliente"); 
 			      m.setBody("El vendedor " + vendedor.getNombre() + ", ha solicitado la creación de un nuevo cliente en la ruta " + cliente.getRuta() + " con los siguientes datos: " + 
 			    		  "\nNombre de Negocio: " + cliente.getNombreNegocio() +
